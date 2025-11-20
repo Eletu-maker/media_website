@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 
 import Posts from '@/components/posts';
-import { getPosts } from '@/lib/posts';
+import { getPosts } from '@/lib/posts-vercel';
 
 async function LatestPosts() {
   const latestPosts = await getPosts(2);

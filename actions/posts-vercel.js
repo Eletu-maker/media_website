@@ -34,23 +34,33 @@ export async function createPost(prevState, formData) {
   try {
     imageUrl = await uploadImage(image);
   } catch (error) {
-    throw new Error(
-      'Image upload failed, post was not created. Please try again later.'
-    );
+    console.error('Image upload error:', error);
+    return { errors: ['Image upload failed, post was not created. Please try again later.'] };
   }
 
-  await storePost({
-    imageUrl: imageUrl,
-    title,
-    content,
-    userId: 1,
-  });
+  try {
+    await storePost({
+      imageUrl: imageUrl,
+      title,
+      content,
+      userId: 1,
+    });
+  } catch (error) {
+    console.error('Store post error:', error);
+    return { errors: ['Failed to save post. Please try again later.'] };
+  }
 
   revalidatePath('/', 'layout');
   redirect('/feed');
 }
 
 export async function togglePostLikeStatus(postId) {
-  await updatePostLikeStatus(postId, 2);
-  revalidatePath('/', 'layout');
+  try {
+    await updatePostLikeStatus(postId, 2);
+    revalidatePath('/', 'layout');
+  } catch (error) {
+    console.error('Toggle like error:', error);
+    // We're not returning anything here as this is typically used in an action
+    // and we want to avoid exposing errors to the client in production
+  }
 }

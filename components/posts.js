@@ -4,7 +4,7 @@ import { useOptimistic } from 'react';
 
 import { formatDate } from '@/lib/format';
 import LikeButton from './like-icon';
-import { togglePostLikeStatus } from '@/actions/posts';
+import { togglePostLikeStatus } from '@/actions/posts-vercel';
 
 function Post({ post, action }) {
   return (

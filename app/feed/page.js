@@ -1,5 +1,5 @@
 import Posts from '@/components/posts';
-import { getPosts } from '@/lib/posts';
+import { getPosts } from '@/lib/posts-vercel';
 
 export default async function FeedPage() {
   const posts = await getPosts();

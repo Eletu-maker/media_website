@@ -1,4 +1,4 @@
-import { createPost } from '@/actions/posts';
+import { createPost } from '@/actions/posts-vercel';
 import PostForm from '@/components/post-form';
 
 export default function NewPostPage() {
